@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <script src="../vue2/vue.js"></script> -->
+        <script src="../vue3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>{{msg}}</p>
+            <input @input="reverse" :value="msg" />
+        </div>
+    </body>
+</html>
+<script>
+Vue.createApp({
+    setup(){
+        let msg = Vue.ref("")
+        let tmp = ""
+        const reverse = (e) => {
+            console.log(e.data)
+            if(e.data){
+                tmp += e.data // 123
+                msg.value = tmp.split("").reverse().join("")
+            }else{
+                tmp = e.target.value
+                msg.value = e.target.value
+            }
+        }
+
+        return {
+            msg,
+            reverse,
+        }
+    }
+}).mount("#app")
+</script>

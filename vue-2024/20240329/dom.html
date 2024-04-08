@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .container {
+                width:300px;
+                height:300px;
+                border:1px solid black;
+                position: relative;
+            }
+
+            .box {
+                width: 100px;
+                height: 100px;
+                position: absolute;
+            }
+
+            .box:nth-child(1) {
+                background-color: red;
+                top: 0;
+            }
+            .box:nth-child(2) {
+                background-color: pink;
+                top: 100px;
+            }
+            .box:nth-child(3) {
+                background-color: blue;
+                top: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+        <button onclick="swap()">交换位置</button>
+    </body>
+</html>
+<script>
+function swap(){
+    const box1 = document.querySelector('.box:nth-child(1)');
+    const box3 = document.querySelector('.box:nth-child(3)');
+    box1.style.top = '200px';
+    box3.style.top = '0';
+}
+</script>

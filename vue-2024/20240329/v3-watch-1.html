@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>watch</title>
+        <script src="../vue3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>vue3-watch</h1>
+            <input v-model="count" >
+        </div>
+    </body>
+</html>
+<script>
+
+const Main = {
+    setup(){
+        const count = Vue.ref(0);
+
+        Vue.watch(count,(newValue,oldValue)=>{
+            console.log(newValue,oldValue);
+        })
+
+        return {
+            count,
+        }
+    }
+}
+const app = Vue.createApp(Main)
+app.mount("#app")
+
+
+</script>

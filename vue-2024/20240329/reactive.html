@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../vue3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+           <h1>{{msg1}}</h1>
+           <input v-model="msg1" /> 
+           <h1>{{msg2}}</h1>
+           <input v-model="msg2" /> 
+           <h1>{{msg3.value}}</h1>
+           <input v-model="msg3.value" /> 
+           <button @click="modify">修改</button>
+        </div>
+    </body>
+</html>
+<script>
+Vue.createApp({
+    setup(){
+        let msg1 = "hello"
+        const msg2 = Vue.ref("你好") // 返回的是对象 Proxy代理对象 被代理的对象就有相应的效果
+        // reactive 接收的参数只能是对象和数组
+        // reactive 返回的是对象 Proxy代理对象 就有响应式的效果
+        // reactive 返回的是对象 只需要点对象属性，不需要像ref点value
+        const msg3 = Vue.reactive({value:"hello vue"})
+        const modify = () => {
+            msg2.value += ",世界"
+            msg3.value += "!!"
+        }
+        return {
+            msg1,
+            msg2,
+            msg3,
+            modify
+        }
+    },
+}).mount("#app")
+</script>

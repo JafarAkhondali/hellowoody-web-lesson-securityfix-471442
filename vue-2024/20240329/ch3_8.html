@@ -1,0 +1,34 @@
+<script src="../vue3/vue.js"></script>
+<div id="app">
+    <ul>
+        <li v-for="(book, index) in books" :key="index">
+            {{++index}}. {{book}}
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(author, index) in authors" :key="author.id">
+            {{++index}}. {{author.name}} - {{author.sex}}
+        </li>
+    </ul>
+    <p v-for="(value, key, index) in userinfo">键是：{{key}}，值是：{{value}}，索引是：{{index}}</p>
+    <p v-for="i in 5">这是第{{i}}段。</p>
+</div>
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                //普通数组
+                books: ['Java',
+                 'python', 
+                 'vue'],
+                 //对象数组
+                 authors:[{id:1,name: '张', sex: '男'}, {id:2,name: '李', sex: '女'}, {id:3,name: '王', sex: '男'}],
+                 //对象
+                 userinfo:{
+                     uname: 'zhangsan',
+                     age: 88
+                 }
+            }
+        }
+    }).mount('#app')
+</script>

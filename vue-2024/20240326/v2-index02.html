@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>vue2</title>
+        <script src="./vue2/vue.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+    </body>
+</html>
+<script>
+const config = {
+    // el:"css选择器", 
+    el:"#app", // el = element link  
+    // VUE2 data中的变量都是有双向绑定的变量
+    data:{
+        msg:"hello vue2" 
+    },
+    methods:{
+        // vue2的方法不能使用箭头函数，this指向会出问题
+        modify(){
+            this.msg = "你好 vue2"
+        },
+
+    },
+    template:`
+        <div>
+            <p>{{msg}}</p>
+            <button v-on:click="modify">修改</button>
+        </div>
+    `
+}
+/*
+Vue构造器
+new Vue(配置对象)
+*/
+const instance = new Vue(config)
+console.log(instance)
+</script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>vue3</title>
+        <script src="./vue3/vue.js"></script>
+    </head>
+    <body>
+        <!-- vue的入口标签 -->
+        <div id="app">
+            <h1>{{msg}} </h1>
+            <!-- <button onclick="modify();">修改</button> -->
+            <button v-on:click="modify">修改</button>
+        </div> 
+    </body>
+</html>
+<script>
+const Component = {
+    setup(){
+        // let msg = "hello VUE3" //  如果你想让一个变量 变得有双向绑定的效果
+        const msg = Vue.ref("hello VUE3") // ref返回的是一个“包裹”后的对象
+
+        const modify = () => {
+            console.log("修改前",msg)
+            msg.value = "你好 vue3" 
+            console.log("修改后",msg)
+        }
+
+        return {
+            msg:msg,
+            modify:modify
+        }
+    }
+}
+
+const app = Vue.createApp(Component)
+app.mount("#app")
+</script>

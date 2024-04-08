@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .box1 {
+                width:50px;
+                height:50px;
+                background-color: pink;
+            }
+
+            .box2 {
+                border-radius: 20px;
+            }
+
+            .box3 {
+                width:150px;
+                height:150px;
+                background-color: purple;
+            }
+        </style>
+        <script src="../vue3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div :class="boxClass">bind class</div>
+            <button v-on:click="pushClass">追加class</button>
+            <button v-on:click="popClass">pop class</button>
+            <hr>
+            <div class="box2" :class="{box1:isActive,box3:!isActive}" ></div>
+            <button v-on:click="toggle">切换isActive1</button>
+        </div>
+    </body>
+</html>
+<script>
+Vue.createApp({
+    setup(){
+        const boxClass = Vue.ref(['box1','box2'])
+        const isActive = Vue.ref(true)
+
+        const pushClass = () => {
+            boxClass.value.push("box3")
+        }
+        const popClass = () => {
+            boxClass.value.pop()
+        }
+        const toggle = () => {
+            isActive.value = !isActive.value
+        }  
+
+        return {
+            boxClass,
+            isActive,
+            pushClass,
+            popClass,
+            toggle
+        }
+    }
+}).mount("#app")
+</script>

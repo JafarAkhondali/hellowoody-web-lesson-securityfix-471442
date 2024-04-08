@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>vue3</title>
+        <script src="./vue3/vue.js"></script>
+    </head>
+    <body>
+        <!-- vue的入口标签 -->
+        <div>
+            <!-- vue的语法 双括号 插值表达法 -->
+            {{msg}}
+        </div>
+    </body>
+</html>
+<script>
+// 组件，组件虽然不是构造器，但按官方的写法也建议首字母大写
+const Component = {
+    // composite api 
+    setup(){
+        return {
+            msg:"hello VUE3"
+        }
+    }
+}
+/*
+Vue构造器
+createApp是构造器中的一个静态方法 static function
+    createApp的参数是组件
+    createApp的返回值是实例对象(单例)
+
+*/
+const app = Vue.createApp(Component)
+// app.mount(css选择器)
+app.mount("div")
+</script>

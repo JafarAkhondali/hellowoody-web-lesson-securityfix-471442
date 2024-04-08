@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../vue3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <input v-model="msg">
+            <br>
+            <h2>{{msg}}</h2> 
+        </div>
+    </body>
+</html>
+
+<script>
+
+Vue.createApp({
+    setup(){
+        const msg = Vue.ref("hello")
+        return {
+            msg
+        }
+    }
+}).mount("#app")
+</script>

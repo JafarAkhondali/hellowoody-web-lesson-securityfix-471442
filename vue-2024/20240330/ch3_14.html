@@ -1,0 +1,76 @@
+<div id="vmodel-databinding">
+    用户名：<input v-model="uname" />
+    <p>输入的用户名是： {{ uname }}</p>
+    <textarea v-model="introduction"></textarea>
+    <p>输入的个人简介是： {{ introduction }}</p>
+    <p>
+        备选歌手：
+        <input type="checkbox" id="zhangsan" value="张三" v-model="singers" />
+        <label for="zhangsan">张三</label>
+        <input type="checkbox" id="lisi" value="李四" v-model="singers" />
+        <label for="lisi">李四</label>
+        <input type="checkbox" id="wangwu" value="王五" v-model="singers" />
+        <label for="wangwu">王五</label>
+        <input type="checkbox" id="chenheng" value="陈恒" v-model="singers" />
+        <label for="chenheng">陈恒</label>
+        <br />
+        <span>你喜欢的歌手: {{ singers }}</span>
+    </p>
+    <p>
+        性别：
+        <input type="radio" id="male" value="男" v-model="sex" />
+        <label for="male">男</label>
+        <input type="radio" id="female" value="女" v-model="sex" />
+        <label for="female">女</label>
+        <br />
+        <span>你的性别: {{ sex }}</span>
+    </p>
+    <p>
+        <!--单选下拉-->
+        备选国籍：
+        <select v-model="single">
+            <option v-for="option in options" :value="option.value">
+                {{ option.text }}
+            </option>
+        </select><br>
+        <span>你的国籍: {{ single }}</span>
+    </p>
+    <p>
+        <!--多选下拉-->
+        备选国家：
+        <select v-model="moreselect" multiple>
+            <option v-for="option in moreoptions" :value="option.value">
+                {{ option.text }}
+            </option>
+        </select><br>
+        <span>你去过的国家: {{ moreselect }}</span>
+    </p>
+</div>
+<script src="js/vue.global.js"></script>
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                uname: '陈恒',
+                introduction: '我是一个好少年',
+                //多个复选框，绑定到同一个数组，歌手'陈恒'默认选择
+                singers: ['陈恒'],
+                sex: '女',//默认性别女
+                //单选下拉列表绑定变量，中国默认国籍
+                single: '中国',
+                options: [
+                    { text: '中国', value: '中国' },
+                    { text: '日本', value: '日本' },
+                    { text: '美国', value: '美国' }
+                ],
+                moreselect: ['中国'],//多选下拉列表绑定一个数组，默认去过中国
+                moreoptions: [
+                    { text: '中国', value: '中国' },
+                    { text: '英国', value: '英国' },
+                    { text: '日本', value: '日本' },
+                    { text: '美国', value: '美国' }
+                ],
+            }
+        }
+    }).mount('#vmodel-databinding')
+</script>

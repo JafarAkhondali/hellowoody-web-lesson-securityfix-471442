@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>component</title>
+        <script src="../vue3/vue.js"></script>
+    </head>
+    <body>
+        <!-- app1 的入口标签 -->
+        <div id="app1">
+            {{msg}}
+            <my-comp></my-comp>
+            <!-- <my-comp /> -->
+        </div>
+        <!-- app2 的入口标签 -->
+        <div id="app2">
+            <my-comp></my-comp>
+        </div>
+    </body>
+</html>
+<script>
+// vue 中的组件 就是自定义标签  
+
+//声明了一个组件
+// const MyComp = Vue.defineComponent({
+//     template:"<h1>hello , 组件1</h1>"
+// })
+
+const MyComp = {
+    setup(){
+        return {
+            msg:"this is component1"
+        }
+    },
+    template:"<h1>hello , 组件1 {{msg}}</h1>"
+}
+
+const MainComp = {
+    setup(){
+        return {
+            msg:"this is app1"
+        }
+    },
+    components:{
+        // "标签名":MyComp
+        // "my-comp":MyComp
+        // "MyComp":MyComp
+        MyComp
+    }
+}
+
+
+Vue.createApp(MainComp).mount("#app1")
+
+Vue.createApp({
+    components:{
+        MyComp
+    }
+}).mount("#app2")
+
+
+</script>

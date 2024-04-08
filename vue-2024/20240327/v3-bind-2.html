@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../vue3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div style="color:red;font-size: 26px;" v-bind:style="boxstyle"  >bind style</div>
+            <div :style="boxstyle2" >bind style</div>
+            <button v-on:click="changeColor">改变颜色</button>
+        </div>
+    </body>
+</html>
+<script>
+Vue.createApp({
+    setup(){
+        const boxstyle = Vue.ref({
+            color:"#000",
+            boxShadow:"0 2px 8px rgb(0 0 0 / 0.2)",
+        })
+        const boxstyle2 = Vue.ref({
+            width:"100px",
+            height:"100px",
+            backgroundColor:"red",
+        })
+        
+        const changeColor = () => {
+            boxstyle.value.color = `hsl(${Math.floor(Math.random()*360)},100%,50%)`
+            boxstyle2.value.backgroundColor = `hsl(${Math.floor(Math.random()*360)},100%,50%)`
+        }
+        return{
+            boxstyle,
+            boxstyle2,
+            changeColor
+        }
+    }
+}).mount("#app")
+</script>

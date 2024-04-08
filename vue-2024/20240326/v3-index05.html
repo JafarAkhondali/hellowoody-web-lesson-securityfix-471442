@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>vue3</title>
+        <script src="./vue3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{msg}} </h1>
+            <button v-on:click="modify">修改</button>
+            <hr>
+            <button v-on:click="decrease">-</button>
+            <span>{{step}}</span>
+            <button v-on:click="increase">+</button>
+            <button v-on:click="update">修改vue2</button>
+        </div> 
+    </body>
+</html>
+<script>
+const Component = {
+    setup(){
+        const msg = Vue.ref("hello VUE3") 
+        const modify = () => msg.value = "你好 vue3" 
+
+        return {
+            msg,
+            modify
+        }
+    },
+    data(){
+        return {
+            step:0
+        }
+    },
+    methods:{
+        increase(){
+            this.step++
+        },
+        decrease(){
+            this.step--
+        },
+        update(){
+            this.msg = 3.14
+        }
+    }
+}
+
+Vue.createApp(Component).mount("#app")
+</script>

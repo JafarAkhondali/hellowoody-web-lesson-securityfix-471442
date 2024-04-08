@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../vue3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div>请选择你的爱好</div>
+            <input type="checkbox" v-model="hobby" name="hobby" value="swim">游泳
+            <input type="checkbox" v-model="hobby" name="hobby" value="workout">健身
+            <input type="checkbox" v-model="hobby" name="hobby" value="travel">旅游
+            <div>{{hobby}}</div>
+        </div>
+    </body>
+</html>
+
+<script>
+Vue.createApp({
+    setup(){
+        const hobby = Vue.ref([])
+        
+        return {
+            hobby
+        }
+    }
+}).mount("#app")
+
+</script>

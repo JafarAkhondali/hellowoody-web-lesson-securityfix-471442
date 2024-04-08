@@ -1,0 +1,20 @@
+<div id="vmodel-databinding">
+    用户名：<input type="text" v-model.lazy="uname">
+    <p>{{ uname }}</p>
+    年龄：<input type="text" v-model.number="age">
+    <p>{{ typeof(age) }}</p>
+    信息：<input type="text" v-model.trim="message">
+    <p>{{ message.length }}</p>
+</div>
+<script src="js/vue.global.js"></script>
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                uname: '',
+                age: '',
+                message: ''
+            }
+        }
+    }).mount('#vmodel-databinding')
+</script>

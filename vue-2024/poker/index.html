@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>poker</title>
+        <link rel="stylesheet" href="./assets/css/style.css">
+        <script src="./assets/js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div id="times">已用时：{{ times.minute }}分{{ times.second }}秒</div>
+            <section id="game">
+              <div id="cards" ref="card_contrainer">
+                <div class="card" ref="card">
+                  <div class="face front"></div>
+                  <div class="face back"></div>
+                </div>
+              </div>
+            </section>
+        </div>
+    </body>
+</html>
+<script>
+const matchingGame = {
+    cardWidth: 80, //牌宽
+    cardHeight: 120, //牌高
+    deck: [
+        "cardAA", "cardAA",
+        "cardAK", "cardAK",
+        "cardAQ", "cardAQ",
+        "cardAJ",  "cardAJ",
+        "cardBA",  "cardBA",
+        "cardBK",  "cardBK",
+        "cardBQ",  "cardBQ",
+        "cardBJ",  "cardBJ",
+    ]
+}
+const {reactive,onMounted,getCurrentInstance} = Vue
+
+Vue.createApp({
+    setup(){
+        const times = reactive({
+            minute: 0,
+            second: 0,
+        })
+     
+        const app = getCurrentInstance()
+        //组件初始化
+        onMounted(() => {
+            //实现随机洗牌，随机排序函数，返回-1或1
+            matchingGame.deck.sort(() => (Math.random() > 0.5 ? -1 : 1))
+            const card = app.refs.card
+            const card_contrainer = app.refs.card_contrainer
+            for (var i = 0; i < 15; i++) {
+                card_contrainer.appendChild(card.cloneNode(true))
+            }
+            //对每张牌进行设置
+            // console.log(card_contrainer.children)
+            let idx = 0
+            for(const item of card_contrainer.children){
+                item.style.left = (matchingGame.cardWidth + 20) * (idx % 4) + "px"
+                item.style.top =  (matchingGame.cardHeight + 20) * Math.floor(idx / 4) + "px"
+                const pattern = matchingGame.deck.pop()
+                item.dataset.pattern = pattern
+                const backEl = item.querySelector(".back")
+                backEl.classList.add(pattern)
+                //  翻牌功能的实现
+                item.addEventListener("click",() => selectCard(item))
+                idx++
+            }
+            //计算用时
+            let mysecond = 0
+            const ticket = setInterval(() => {
+                mysecond++
+                //计算用时
+                times.minute =Math.floor(mysecond / 60) 
+                times.second = mysecond % 60
+                //是否全部消除，全部消除，用时停止
+                if(card_contrainer.querySelectorAll(".card-removed").length === 16){
+                    alert("用时：" +  times.minute + "分" +  times.second + "秒")
+                    clearInterval(ticket)
+                }
+            }, 1000)
+        })
+        return {
+            times
+        }
+    }
+}).mount("#app")
+
+//  翻牌功能的实现
+function selectCard(item){
+    let flipped_card_arr = item.querySelectorAll(".card-flipped")
+    //翻了两张牌后退出翻牌
+    if (flipped_card_arr.length > 1) {
+        return
+    }
+
+    item.classList.add("card-flipped")
+    //若翻动了两张牌，检测一致性
+    flipped_card_arr = document.querySelectorAll(".card-flipped")
+    if (flipped_card_arr.length === 2) {
+        setTimeout(() => {
+            checkPattern(flipped_card_arr)
+        }, 800)
+    }
+}
+
+//检测2张牌是否一致
+function checkPattern(cards){
+    // console.log(cards)
+    const pattern1 = cards[0].dataset.pattern
+    const pattern2 = cards[1].dataset.pattern
+    cards.forEach(item => {
+        // console.log(item)
+        item.classList.remove("card-flipped")
+    })
+    // console.log(1000,pattern1,pattern2)
+    if (pattern1 === pattern2) {
+        cards.forEach(item => {
+            item.classList.add("card-removed")
+        })
+    }
+}
+</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>vue3</title>
+        <script src="./vue3/vue.js"></script>
+    </head>
+    <body>
+        <!-- vue的入口标签 内的标签虚拟标签 virtual dom -->
+        <div id="app">
+            <!-- <h1>{{msg}} </h1>
+            <button v-on:click="modify">修改</button> -->
+        </div> 
+    </body>
+</html>
+<script>
+const Component = {
+    setup(){
+        const msg = Vue.ref("hello VUE3") 
+        // 在setup中的方法建议使用箭头函数，因为箭头函数的this指向的是外部的this
+        const modify = () => msg.value = "你好 vue3" 
+
+        return {
+            // msg:msg,
+            // modify:modify,
+            // js增强语法
+            msg,
+            modify
+        }
+    },
+    // template里的就是vue自己虚拟标签
+    template:`
+        <h1>{{msg}} </h1>
+        <button v-on:click="modify">修改</button>
+    `
+}
+
+// const app = Vue.createApp(Component)
+// app.mount("#app")
+// 链式调用法
+Vue.createApp(Component).mount("#app")
+</script>

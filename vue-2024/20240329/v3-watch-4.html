@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>watch</title>
+        <script src="../vue3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>vue3-watch </h1>
+            <input v-model="stu.name" >
+            <br>
+            <input v-model="stu.p1" >
+            <br>
+            <input v-model="stu.p2" >
+            <br>
+            <input v-model="stu.p3" >
+        </div>
+    </body>
+</html>
+<script>
+const Main = {
+    setup(){    
+        const stu = Vue.reactive({
+            name:"zhang",
+            p1:"1",
+            p2:"2",
+            p3:"3",
+            p4:"4",
+            p5:"5",
+            p6:"6",
+        })
+        // shallow copy 
+        Vue.watch(() => Object.assign({},stu),(curr,prev) => {
+            console.log("curr",curr)
+            console.log("prev",prev)
+        })
+        return {
+            stu
+        }
+    }
+}
+const app = Vue.createApp(Main)
+app.mount("#app")
+</script>

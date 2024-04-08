@@ -1,0 +1,14 @@
+<div id="event-handling">
+    <a href="https://www.baidu.com/" @click.prevent="warn('考试期间禁止百度！')">去百度</a>
+</div>
+<script src="js/vue.global.js"></script>
+<script>
+    Vue.createApp({
+        methods: {
+            warn(message) {
+                //event访问原生的DOM事件
+                alert(message)
+            }
+        }
+    }).mount('#event-handling')
+</script>

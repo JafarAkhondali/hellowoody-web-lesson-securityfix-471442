@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- 2024 -->
+        <script src="../vue3/vue.js"></script> 
+        <!-- 2023 -->
+        <!-- <script src="./vue3/vue.js"></script>   -->
+    </head>
+    <body>
+        <div id="app">
+            <button @click="handle1">调用方法1</button>
+            <button @click="handle2($event)">调用方法2</button>
+            <button @click="handle3(100)">调用方法3</button>
+            <button @click="handle31(100,200)">调用方法3</button>
+            <button @click="handle32(100,200,3.14)">调用方法3</button>
+            <button @click="handle4($event,108)">调用方法4</button>
+            <button @click="handle5(108,-2,$event)">调用方法5</button>
+        </div>
+    </body>
+</html>
+<script>
+Vue.createApp({
+    setup(){
+        const handle1 = (e) => {
+            console.log(e)
+        }
+
+        const handle2 = (e) => console.log(e)
+        const handle3 = (e) => console.log(e)
+        const handle31 = (p1,p2) => console.log(p1,p2)
+        const handle32 = (p1,p2,p3) => console.log(p1,p2,p3)
+        const handle4 = (e,p) => console.log(e,p)
+        const handle5 = (p1,p2,p3) => console.log(p1,p2,p3)
+
+        return {
+            handle1,
+            handle2,
+            handle3,
+            handle31,
+            handle32,
+            handle4,
+            handle5
+        }
+    }
+}).mount("#app")
+</script>

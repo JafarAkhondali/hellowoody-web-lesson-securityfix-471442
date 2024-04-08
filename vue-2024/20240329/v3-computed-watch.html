@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>v-for</title>
+        <script src="../vue3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div>
+                <input v-model="msg" />
+            </div>
+            <div>computed    {{reverseMsg}}</div>
+            <div>watch       {{msg_watch}}</div>
+            <div>watcheffect {{msg_watch_effect}}</div>
+        </div>
+    </body>
+</html>
+<script>
+Vue.createApp({
+    setup(){
+        const msg = Vue.ref("hello")
+        
+        const msg_watch = Vue.ref("hello")
+        const msg_watch_effect = Vue.ref("hello")
+
+        const reverseMsg = Vue.computed(function(){
+            return Array.from(msg.value).reverse().join('')
+        })
+
+        Vue.watch(msg, function(newVal){
+            msg_watch.value = Array.from(newVal).reverse().join('')
+        })
+
+        Vue.watchEffect(() => {
+            msg_watch_effect.value = Array.from(msg.value).reverse().join('')
+        })
+
+        return {
+            msg,
+            msg_watch,
+            reverseMsg,
+            msg_watch_effect
+        }
+    }
+}).mount("#app")
+</script>
